@@ -31,6 +31,10 @@ function appendViewsToWindow(views) {
     appendChildToParentNode(views[0], views[4]);
     appendChildToParentNode(views[0], views[5]);
     appendChildToParentNode(views[0], views[6]);
+    appendChildToParentNode(views[0], views[7]);
+    appendChildToParentNode(views[0], views[8]);
+    appendChildToParentNode(views[0], views[9]);
+    appendChildToParentNode(views[0], views[10]);
 
     appendChildToParentNode(listView, views[0]);
 
@@ -55,11 +59,32 @@ function createViewsOnWindow(taskId) {
     const viewCreation = createViewCreation(taskId);
     const btnEdit = createBtnTask(taskId, 'edit');
     const btnDelete = createBtnTask(taskId, 'delete');
+    const labelComplete = createLabel(taskId, 'complete');
+    const labelPending = createLabel(taskId, 'pending');
+    const radioComplete = createRadioButton(taskId, 'complete');
+    const radioPending = createRadioButton(taskId, 'pending');
 
     deleteTask(btnDelete, taskId);
     editTask(btnEdit, taskId);
 
-    return [viewListItem, viewTitle, viewDescription, viewDeadline, viewCreation, btnEdit, btnDelete];
+    return [viewListItem, viewTitle, viewDescription, viewDeadline, viewCreation, btnEdit, btnDelete, labelComplete, radioComplete, labelPending, radioPending];
+}
+function createLabel(taskId, type) {
+    const item = createNewElement('label');
+    setElementAttribute(item, 'for', `task_${type}_${taskId}`);
+    item.textContent = `${type}`;
+    return item;
+}
+function createRadioButton(taskId, type) {
+    const item = createNewElement('input');
+    setElementAttribute(item, 'type', 'radio');
+    setElementAttribute(item, 'id', `task_${type}_${taskId}`);
+    setElementAttribute(item, 'name', `task_status_${taskId}`);
+    setElementAttribute(item, 'disabled', 'disabled');
+    setElementAttribute(item, 'value', `${type}`);
+    if (type == 'pending')
+        setElementAttribute(item, 'checked', 'checked');
+    return item;
 }
 
 function createBtnTask(taskId, type) {
@@ -137,3 +162,5 @@ function resetTaskDetailsInput() {
 
 //     return (currentTaskRadioPending.checked) ? 'pending' : 'complete';
 // }
+
+

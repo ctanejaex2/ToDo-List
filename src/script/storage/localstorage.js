@@ -36,8 +36,13 @@ function updateTaskInLocalStorage(taskId) {
     const updatedDescription = document.getElementById(`task_description_${taskId}`).value;
     const updatedDeadline = document.getElementById(`task_deadline_${taskId}`).value;
 
+    const updatedStatus = document.querySelector(`input[name=task_status_${taskId}]:checked`).value;
+
+
     tasks[`task_${taskId}`][`taskTitle`] = updatedTitle;
     tasks[`task_${taskId}`][`taskDescription`] = updatedDescription;
     tasks[`task_${taskId}`][`taskDeadline`] = updatedDeadline;
+    tasks[`task_${taskId}`][`taskStatus`] = updatedStatus;
+
     localStorage.setItem('tasks', parseJSONtoString(tasks));
 }

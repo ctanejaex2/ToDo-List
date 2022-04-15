@@ -7,6 +7,4 @@ export class Task {
         this.taskCreation = creation;
         this.taskStatus = status;
     }
-
-    
 }
